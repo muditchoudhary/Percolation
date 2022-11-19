@@ -10,15 +10,18 @@ import edu.princeton.cs.algs4.StdStats;
 public class PercolationStats {
     // perform independent trials on an n-by-n grid
 
-    private int[] totalOpenSites;
+    private double[] totalOpenSites;
     private int totalTrials;
 
     public PercolationStats(int n, int trials) {
         validate(n, trials);
 
-        int openSite;
+        double openSite;
         totalTrials = trials;
-        totalOpenSites = new int[trials];
+        totalOpenSites = new double[trials];
+
+        // In in = new In("input20.txt");      // input file
+        // int num = in.readInt();         // n-by-n percolation system
 
         for (int i = 0; i < trials; i++) {
             Percolation perc = new Percolation(n);
@@ -31,7 +34,12 @@ public class PercolationStats {
                 if (!perc.isOpen(randomeRow, randomCol)) perc.open(randomeRow, randomCol);
 
             }
-            openSite = perc.numberOfOpenSites();
+            // while (!in.isEmpty() && !perc.percolates()) {
+            //     int k = in.readInt();
+            //     int j = in.readInt();
+            //     perc.open(k, j);
+            // }
+            openSite = (double) perc.numberOfOpenSites() / (double) (n * n);
             totalOpenSites[i] = openSite;
         }
     }
@@ -74,7 +82,7 @@ public class PercolationStats {
         }
     }
 
-    private int[] getTotalOpenSites() {
+    private double[] getTotalOpenSites() {
         return totalOpenSites;
     }
 
